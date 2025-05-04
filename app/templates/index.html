@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NHentai Archiver Dashboard</title>
+
+
+  <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"
+    integrity="sha384‑WN3F0Wo3e2kLJZ+U/gP6g8Js+5H1gC0X4TwQKQyU4diU5Qe3LdVg+KjJdo6s9gw2"
+    crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+  <div class="container">
+    <!-- Left column: Progress bars -->
+    <div class="col1 card">
+      {% include 'progress.html' %}
+
+    </div>
+
+    <!-- Right column: Settings and Buttons-->
+    <div class="col2 card">
+      
+      {% include 'control.html' %}
+      
+    </div>
+
+    <!-- Left bottom: Logs -->
+    <!-- <div class="bottom1"> -->
+
+    <!-- </div> -->
+    <!-- Right bottom: Files -->
+    <!-- <div class="bottom2"> -->
+
+    <!-- </div> -->
+  </div>
+
+
+
+  <script type="module" src="{{ url_for('static', filename='scripts.js') }}" defer></script>
+</body>
+
+</html>

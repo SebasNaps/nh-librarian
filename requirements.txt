@@ -1,0 +1,10 @@
+beautifulsoup4==4.13.4
+eventlet==0.39.1
+Flask==3.1.0
+Flask_SocketIO==5.5.1
+natsort==8.4.0
+Pillow==11.2.1
+pyee==13.0.0
+Requests==2.32.3
+setuptools==79.0.1
+Werkzeug==3.1.3

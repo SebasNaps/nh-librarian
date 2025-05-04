@@ -1,0 +1,166 @@
+
+
+<!-- <button id="test-btn" class="btn">Test Button</button> -->
+<h1>Control</h1>
+
+<!-- Run Mode -->
+<!-- this button shows the current choice -->
+<button id="modeBtn" class="btn">
+    Run Mode ▾
+</button>
+<!-- the hidden menu -->
+<div id="modeMenu" class="dropdown-content" style="position: absolute;"  >
+    <a href="#" data-value="auto">Automatic Mode</a>
+    <a href="#" data-value="custom">Custom Mode</a>
+</div>
+
+
+<!-- ID SOURCE -->
+<!-- this button shows the current choice -->
+<button id="idSourceBtn" class="btn" style="display:None">
+    Select ID Source ▾
+</button>
+<!-- the hidden menu -->
+<div id="idSourceMenu" class="dropdown-content">
+    <a href="#" data-value="favs">Favorites from Page</a>
+    <a href="#" data-value="pre_fetched_favs">Pre-Fetched Favorites</a>
+    <a href="#" data-value="id_list">Manual ID List</a>
+</div>
+
+<!-- Run Until -->
+<!-- this button shows the current choice -->
+<button id="runUntilBtn" class="btn" style="display:None">
+    Run Until ▾
+</button>
+<!-- the hidden menu -->
+<div id="runUntilMenu" class="dropdown-content" style="position: absolute;"  >
+    <a href="#" data-value="favs">Fetch Favorites</a>
+    <a href="#" data-value="meta">Fetch Metadata</a>
+    <a href="#" data-value="urls">Fetch URLs</a>
+    <a href="#" data-value="down">Download Images</a>
+    <a href="#" data-value="cbz">Archive in .cbz</a>
+</div>
+
+
+<button id="start-stop-btn" class="btn" data-state="start">
+    Start
+</button>
+
+<br>
+<br>
+<!-- Cookie Data -->
+<button id="cookie-btn" class="btn">Cookie Input</button>
+<!-- ID List -->
+<button id="ids-btn" class="btn">IDs Input</button>
+
+
+<br>
+<button id="toggle-advanced" class="btn" style="margin-top:1rem;">Advanced Settings</button>
+
+
+<div id="advanced-settings" class="advanced-settings">
+    <h3>Advanced Settings</h3>
+    <div class="advanced-row">
+        <label for="convert-checkbox">Convert images to .webp-format?:</label>
+        <input type="checkbox" name="convert" id="convert-checkbox" checked>
+    </div>
+    <br>
+    <div class="advanced-row">
+        <!-- Delete images after archiving -->
+        <label for="autodelete-checkbox">Delete Images after Archiving:</label>
+        <input type="checkbox" name="autodelete" id="autodelete-checkbox" checked>
+    </div>
+    <br>
+    <div class="advanced-row">
+        <label for="live-progress-checkbox">Save live progress to data files?:</label>
+        <input type="checkbox" id="live-progress-checkbox">
+    </div>
+    <br>
+    <div class="advanced-row">
+        <!-- WEBP Quality -->
+        <label for="webp-quality">Quality Setting for .webp-Conversion in %:</label>
+        <input type="text" id="webp-quality" placeholder="85" class="small-input">
+    </div>
+    <br>
+    <div class="advanced-row">
+        <!-- CBZ Quality -->
+        <label for="cbz-quality">Compression Setting for .cbz Archiving:</label>
+        <input type="text" id="cbz-quality" placeholder="6" class="small-input">
+    </div>
+    <br>
+    <div class="advanced-row">
+        <!-- RETRYs -->
+        <label for="error-retry">Retries for Errors:</label>
+        <input type="text" id="error-retry" placeholder="5" class="small-input">
+    </div>
+    <br>
+    <div class="advanced-row">
+        <!-- RETRYs -->
+        <label for="show-cover">Show doujin cover image:</label>
+        <input type="checkbox" id="show-cover">
+    </div>
+    <br>
+    <div style="text-align:right;">
+        <button id="apply-adv" class="btn btn-send">Apply</button>
+        <button id="reset-adv" class="btn btn-close">Reset</button>
+    </div>
+</div>
+<br>
+<br>
+<br>
+<br>
+
+<!-- Cookies Input -->
+<div id="cookieOverlay" class="overlay"></div>
+<div id="cookieModal" class="modal">
+  <h2>Input Cookie Data</h2>
+  <input type="text" id="cookie_id" placeholder="Cookie ID">
+  <input type="text" id="cookie_cf" placeholder="Cloudflare Clearance">
+  <div style="text-align: right;">
+    <button id="cookie-save-btn" class="btn btn-send">Save</button>
+    <button id="cookie-close-btn" class="btn btn-close">Close</button>
+  </div>
+</div>
+
+<!-- IDs Input -->
+<div id="idsOverlay" class="overlay"></div>
+<div id="idsModal" class="modal">
+  <h2>Input ID List</h2>
+  <textarea id="id_list" rows="5" placeholder="List of IDs"
+    style="width:100%; margin-top:.5rem;">
+  </textarea>
+  <div style="text-align: right;">
+    <button id="ids-save-btn" class="btn btn-send">Save</button>
+    <button id="ids-close-btn" class="btn btn-close">Close</button>
+  </div>
+</div>
+
+<h2>Files</h2>
+
+<button
+  class="btn"
+  onclick="window.open('/data', '_blank', 'noopener')"
+>
+  Internal Data
+</button>
+
+<button
+  class="btn"
+  onclick="window.open('/logs', '_blank', 'noopener')"
+>
+  Logs
+</button>
+
+<button
+  class="btn"
+  onclick="window.open('/downloads', '_blank', 'noopener')"
+>
+  Downloaded Image Files
+</button>
+
+<button
+  class="btn"
+  onclick="window.open('/archives', '_blank', 'noopener')"
+>
+  .cbz Archives
+</button>

@@ -1,0 +1,141 @@
+<h1>Progress</h1>
+<!-- "Fetching favorites"/"Loading Metadata for doujin {ID}"/"Loading URLs/Images / Converting / Archiving doujin {ID} + Metadata" -->
+<!-- Hide Progress bars if not needed, only show those applicable -->
+
+<div class="progress-container">
+
+
+    <!-- Fetch Favorites -->
+    <table width="100%">
+        <tr>
+            <td align="left">
+                <span>Fetching Favorites:</span>
+            </td>
+            <td align="right">
+                <span id="progress-favs">--</span>
+            </td>
+        </tr>
+    </table>
+
+
+    <!-- Doujin X/X -->
+    <table width="100%">
+        <tr>
+            <td align="left">
+                <label for="progress-total">Doujins:</label>
+            </td>
+            <td align="right">
+                <span></span><span id="progress-total-text">--</span>
+            </td>
+        </tr>
+    </table>
+    <div class="progress-bar">
+        <div class="progress-fill"  id="progress-total"></div>
+    </div>
+    <div id="error-div1" class="progress-bar" style="visibility: hidden; pointer-events: none">
+        <div class="progress-error" id="progress-error"></div>
+    </div>
+    <div id="error-div1" style="visibility: hidden; pointer-events: none"><span id="errors-text"></span></div>
+    
+    <br>
+
+    <!-- Doujin Info -->
+    <table width="100%" height="300px">
+        <tr>
+            <td>
+                <div id="logo-container" class="image-frame" style="cursor: pointer;">
+                    <img src="{{ logo }}" alt="Logo or Doujin Cover" class="frame-img" alt="Logo">
+                </div>
+
+                <div id="cover-container" class="image-frame" style="display: none; cursor: pointer;">
+                    <img id="cover-img" src="{{ logo_cat }}" class="frame-img" alt="Cover">
+                </div>
+            </td>
+            <td width="70%" align="left" vertical-align: top>
+                <h3>Current Doujin:</h3>
+                <br>
+                <span>Title: </span><span id="doujin-title"></span><br><br>
+                <span>ID: </span><span id="doujin-id" href="https://nhentai.net" ></span><br><br>
+                <span>Author: </span><span id="doujin-author"></span><br><br>
+                <span>Tags: </span><br>
+                <span id="doujin-tags"
+                style="display: inline-block; width: 250px; white-space: normal; word-wrap: break-word;"></span> 
+                <!-- TODO -->
+            </td>
+
+        </tr>
+    </table>
+
+
+    <!-- Doujin step/X -->
+    <table width="100%">
+        <tr>
+            <td align="left">
+                <span id="progress-doujin-step"></span>
+            </td>
+            <td align="right">
+                <span>Step </span><span id="progress-doujin-text">--/--</span>
+            </td>
+        </tr>
+    </table>
+    <div class="progress-bar">
+        <div class="progress-fill" id="progress-doujin"></div>
+    </div>
+    <br>
+
+    <!-- URLs -->
+    <div id="URLs-progress-container" style="display: all;">
+        <table width="100%" style="display: all;">
+            <tr>
+                <td align="left">
+                    <label for="progress-urls">Fetching URLs:</label>
+                </td>
+                <td align="right">
+                    <span>Page </span><span id="progress-urls-text">--/--</span>
+                </td>
+            </tr>
+        </table>
+        <div class="progress-bar">
+            <div class="progress-fill" id="progress-urls"></div>
+        </div>
+    </div>
+    <br>
+
+    <!-- Download -->
+    <div id="URLs-progress-container" style="display: all;">
+        <table width="100%">
+            <tr>
+                <td align="left">
+                    <label for="progress-down">Downloading Images:</label>
+                </td>
+                <td align="right">
+                    <span>Page </span><span id="progress-down-text">--/--</span>
+                </td>
+            </tr>
+        </table>
+        <div class="progress-bar">
+            <div class="progress-fill" id="progress-down"></div>
+        </div>
+    </div>
+    <br>
+
+    <!-- Conversion -->
+    <div id="URLs-progress-container" style="display: all;">
+        <table width="100%">
+            <tr>
+                <td align="left">
+                    <label for="progress-conv">Converting Images to .webp:</label>
+                </td>
+                <td align="right">
+                    <span>Page </span><span id="progress-conv-text">--/--</span>
+                </td>
+            </tr>
+        </table>
+        <div class="progress-bar">
+            <div class="progress-fill" id="progress-conv"></div>
+        </div>
+    </div>
+    <br>
+
+
+</div>

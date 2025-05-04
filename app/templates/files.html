@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Files - {{ folder_type.capitalize() }}{% if subpath %}/{{ subpath }}{% endif %}</title>
+  <!-- Link to global stylesheet -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const flash = document.getElementById('flash-container');
+      if (flash && flash.children.length) {
+        flash.style.display = 'block';
+        setTimeout(() => { flash.style.display = 'none'; }, 3000);
+      }
+    });
+  </script>
+</head>
+<body>
+  <div class="container">
+    <!-- Navigation -->
+    <div class="col1">
+      <nav class="card">
+        <a class="btn" href="{{ url_for('files_index', folder_type='data') }}">Data</a>
+        <a class="btn" href="{{ url_for('files_index', folder_type='logs') }}">Logs</a>
+        <a class="btn" href="{{ url_for('files_index', folder_type='downloads') }}">Downloads</a>
+        <a class="btn" href="{{ url_for('files_index', folder_type='archives') }}">Archive</a>
+      </nav>
+    </div>
+
+    <!-- Upload / Flash Messages -->
+    <div class="col2">
+      <div id="flash-container">
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% for category, msg in messages %}
+          <div class="flash {{ category }}">{{ msg }}</div>
+        {% endfor %}
+      {% endwith %}
+    </div>
+
+      {% if can_upload %}
+      <form class="upload-form card" action="{{ url_for('files_index', folder_type=folder_type, subpath=subpath) }}" method="post" enctype="multipart/form-data">
+        <input type="file" name="file">
+        <button type="submit" class="btn btn-send">Upload</button>
+      </form>
+      {% else %}
+        <p><em>Uploading disabled for this folder.</em></p>
+      {% endif %}
+    </div>
+
+    <!-- File Listing -->
+    <div class="bottom card">
+      <h1>{{ folder_type.capitalize() }}{% if subpath %} / {{ subpath }}{% endif %}</h1>
+
+      {% if folder_type == 'downloads' and crumbs %}
+      <div class="crumbs">
+        <a class="btn btn-close" href="{{ url_for('files_index', folder_type='downloads') }}">Root</a>
+        {% for crumb in crumbs %}
+          <a class="btn" href="{{ url_for('files_index', folder_type='downloads', subpath=crumb.path) }}">{{ crumb.name }}</a>
+        {% endfor %}
+      </div>
+      {% endif %}
+
+      {% if folder_type == 'downloads' and dirs %}
+      <h2>Folders</h2>
+      <ul>
+        {% for d in dirs %}
+          <li>
+            <a class="btn" href="{{ url_for('files_index', folder_type='downloads', subpath=d.rel_path) }}">📁 {{ d.name }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+
+      {% if files %}
+  <h2>Files</h2>
+
+  <!-- Batch form -->
+  <form method="post" action="{{ url_for('batch_action', folder_type=folder_type, subpath=subpath) }}">
+    <table>
+      <thead>
+        <tr>
+          <th><input type="checkbox" id="select-all" /></th>
+          <th>Name</th>
+          <th>Size</th>
+          <th>Download</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for f in files %}
+        <tr>
+          <td>
+            <input type="checkbox" name="selected_files" value="{{ (subpath ~ '/' if subpath else '') ~ f.name }}">
+          </td>
+          <td>{{ f.name }}</td>
+          <td>{{ f.size_human }}</td>
+          <td>
+            <a class="btn btn-send"
+               href="{{ url_for('download_file', folder_type=folder_type, filename=(subpath ~ '/' if subpath else '') ~ f.name) }}">
+              Download
+            </a>
+          </td>
+          <td>
+            <form action="{{ url_for('delete_file', folder_type=folder_type, filename=(subpath ~ '/' if subpath else '') ~ f.name) }}"
+                  method="post" onsubmit="return confirm('Delete {{ f.name }}?');" style="display:inline;">
+              <button type="submit" class="btn btn-close">Delete</button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <div class="form-row">
+      <button type="submit"
+              name="action"
+              value="download"
+              class="btn btn-send btn-sm">
+        Download selected as ZIP
+      </button>
+
+      <a href="{{ url_for('download_all', folder_type=folder_type, subpath=subpath) }}"
+         class="btn btn-send btn-sm">
+        Download ALL as ZIP
+      </a>
+    
+      <button type="submit"
+              name="action"
+              value="delete"
+              class="btn btn-close btn-sm"
+              onclick="return confirm('Really delete all selected files?');">
+        Delete selected
+      </button>
+    
+      
+    </div>
+  </form>
+
+  <script>
+    // “Select all” checkbox behavior
+    document.getElementById('select-all').addEventListener('change', function(e) {
+      document.querySelectorAll('input[name="selected_files"]').forEach(cb => {
+        cb.checked = e.target.checked;
+      });
+    });
+  </script>
+
+{% else %}
+  <p>No files found…</p>
+{% endif %}
+    </div>
+  </div>
+</body>
+</html>
